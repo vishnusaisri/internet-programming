@@ -1,0 +1,29 @@
+<html>
+<body>
+
+<h2>Background Color Based on System Time</h2>
+
+<script type="text/javascript">
+
+let hour = new Date().getHours();
+
+if (hour >= 6 && hour < 12) {
+    document.body.style.backgroundColor = "lightyellow";
+}
+else if (hour >= 12 && hour < 18) {
+    document.body.style.backgroundColor = "lightblue";
+}
+else if (hour >= 18 && hour < 21) {
+    document.body.style.backgroundColor = "orange";
+}
+else {
+    document.body.style.backgroundColor = "black";
+    document.body.style.color = "white";
+}
+
+document.write("<h3>Current Hour: " + hour + "</h3>");
+
+</script>
+
+</body>
+</html>vvvvvvvv
