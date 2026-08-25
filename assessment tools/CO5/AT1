@@ -1,0 +1,658 @@
+```xml
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:hs="http://hospital.example.com/service">
+
+    <soap:Header>
+        <hs:Authentication>
+            <hs:UserId>doctor101</hs:UserId>
+            <hs:Token>ABC123XYZ</hs:Token>
+        </hs:Authentication>
+    </soap:Header>
+
+    <soap:Body>
+        <hs:GetMedicalRecord>
+            <hs:PatientId>P1001</hs:PatientId>
+        </hs:GetMedicalRecord>
+    </soap:Body>
+
+</soap:Envelope>
+```
+## 1.4 SOAP Response
+
+The server processes the request and returns a SOAP response.
+
+```xml
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:hs="http://hospital.example.com/service">
+
+    <soap:Body>
+        <hs:GetMedicalRecordResponse>
+            <hs:PatientId>P1001</hs:PatientId>
+            <hs:Diagnosis>Fever</hs:Diagnosis>
+            <hs:Doctor>Dr. Kumar</hs:Doctor>
+            <hs:VisitDate>2026-08-20</hs:VisitDate>
+        </hs:GetMedicalRecordResponse>
+    </soap:Body>
+
+</soap:Envelope>
+```
+
+---
+
+## 1.5 Major Operations
+
+### Operation 1: Add Patient
+
+```text
+addPatient(patientId, name, age, gender, contact)
+```
+
+This operation registers a new patient in the hospital system.
+
+### Operation 2: Get Patient
+
+```text
+getPatient(patientId)
+```
+
+This operation retrieves patient information.
+
+### Operation 3: Schedule Appointment
+
+```text
+scheduleAppointment(patientId, doctorId, date, time)
+```
+
+This operation schedules an appointment with a doctor.
+
+### Operation 4: Get Medical Records
+
+```text
+getMedicalRecord(patientId)
+```
+
+This operation retrieves the patient's medical history.
+
+### Operation 5: Update Medical Record
+
+```text
+updateMedicalRecord(patientId, diagnosis, prescription)
+```
+
+This operation allows authorized medical staff to update records.
+
+### Operation 6: Cancel Appointment
+
+```text
+cancelAppointment(appointmentId)
+```
+
+This operation cancels an existing appointment.
+
+---
+
+
+## 1.7 Error Handling Using SOAP Fault
+
+If an invalid patient ID is provided, the server can return a SOAP Fault.
+
+```xml
+<soap:Fault>
+    <faultcode>soap:Client</faultcode>
+    <faultstring>Patient ID P9999 does not exist</faultstring>
+</soap:Fault>
+```
+
+
+
+
+---
+
+# Question 2: WSDL Structure for an Enterprise Web Service
+
+
+# 2.2 Major Components of WSDL
+
+
+
+Example:
+
+```xml
+<types>
+    <xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+        <xsd:element name="GetCustomerRequest">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="customerId"
+                                 type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+
+    </xsd:schema>
+</types>
+```
+
+---
+
+## 2. Message
+
+The `message` element defines the input and output messages exchanged by the service.
+
+Example:
+
+```xml
+<message name="GetCustomerRequest">
+    <part name="parameters"
+          element="tns:GetCustomerRequest"/>
+</message>
+
+<message name="GetCustomerResponse">
+    <part name="parameters"
+          element="tns:GetCustomerResponse"/>
+</message>
+```
+
+---
+
+## 3. PortType
+
+The `portType` defines the abstract interface of the service.
+
+It specifies the operations supported by the service.
+
+Example:
+
+```xml
+<portType name="CustomerPortType">
+
+    <operation name="getCustomer">
+        <input message="tns:GetCustomerRequest"/>
+        <output message="tns:GetCustomerResponse"/>
+    </operation>
+
+    <operation name="updateCustomer">
+        <input message="tns:UpdateCustomerRequest"/>
+        <output message="tns:UpdateCustomerResponse"/>
+    </operation>
+
+</portType>
+```
+
+The `portType` can be compared to an interface in programming because it describes what the service can do without specifying how communication takes place.
+
+---
+
+## 2.4 Binding
+
+The `binding` specifies how the abstract operations are implemented over a communication protocol.
+
+For example, the service can use SOAP over HTTP.
+
+```xml
+<binding name="CustomerSoapBinding"
+         type="tns:CustomerPortType">
+
+    <soap:binding
+        style="document"
+        transport="http://schemas.xmlsoap.org/soap/http"/>
+
+</binding>
+```
+
+The binding therefore connects the abstract interface with a concrete communication protocol.
+
+---
+
+## 2.5 Service
+
+The `service` element specifies the actual endpoint where the web service can be accessed.
+
+```xml
+<service name="CustomerService">
+
+    <port name="CustomerPort"
+          binding="tns:CustomerSoapBinding">
+
+        <soap:address
+            location="https://example.com/services/customer"/>
+
+    </port>
+
+</service>
+```
+
+The endpoint tells the client where to send SOAP messages.
+
+---
+
+# 2.6 Complete Simplified WSDL Structure
+
+The following represents the overall structure:
+
+```xml
+<definitions
+    name="CustomerService"
+    targetNamespace="http://example.com/customer"
+    xmlns:tns="http://example.com/customer"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+
+        <xsd:schema
+            targetNamespace="http://example.com/customer">
+
+            <xsd:element name="GetCustomerRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="customerId"
+                                     type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+
+    </types>
+
+    <message name="GetCustomerRequest">
+        <part name="parameters"
+              element="tns:GetCustomerRequest"/>
+    </message>
+
+    <message name="GetCustomerResponse">
+        <part name="parameters"
+              element="tns:GetCustomerResponse"/>
+    </message>
+
+    <portType name="CustomerPortType">
+
+        <operation name="getCustomer">
+            <input message="tns:GetCustomerRequest"/>
+            <output message="tns:GetCustomerResponse"/>
+        </operation>
+
+    </portType>
+
+    <binding name="CustomerSoapBinding"
+             type="tns:CustomerPortType">
+
+        <soap:binding
+            style="document"
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    </binding>
+
+    <service name="CustomerService">
+
+        <port name="CustomerPort"
+              binding="tns:CustomerSoapBinding">
+
+            <soap:address
+                location="https://example.com/customer"/>
+
+        </port>
+
+    </service>
+
+</definitions>
+```
+
+---
+
+# 2.7 WSDL Component Relationship
+
+The components can be understood as follows:
+
+```text
+              WSDL
+               |
+       +-------+-------+
+       |               |
+     Types           Messages
+       |               |
+       +-------+-------+
+               |
+            PortType
+               |
+            Binding
+               |
+             Service
+               |
+           Endpoint URL
+```
+
+The flow is:
+
+**Types → Messages → PortType → Binding → Service → Endpoint**
+
+---
+
+# 2.8 Importance of WSDL in Service Integration
+
+WSDL is important because it:
+
+1. Provides a standardized service description.
+2. Allows clients to discover available operations.
+3. Defines input and output data structures.
+4. Specifies communication protocols.
+5. Specifies the service endpoint.
+6. Supports interoperability between different platforms.
+7. Enables automated client generation.
+8. Reduces integration errors.
+9. Separates service interface from implementation.
+10. Makes enterprise systems easier to integrate.
+
+For example, a Java client, .NET client, or another programming language can consume the same WSDL and communicate with the service.
+
+Thus, WSDL acts as a **contract between the service provider and service consumer**.
+
+---
+
+# Question 3: Analysis and Debugging of SOAP Communication Problems
+
+## 3.1 Problem Analysis
+
+In the given enterprise environment, SOAP requests are not being processed correctly and responses are delayed or incorrect.
+
+Possible causes include:
+
+* Incorrect XML formatting
+* Invalid SOAP Envelope
+* Incorrect namespace
+* Incorrect operation name
+* Incorrect data type
+* Invalid SOAPAction
+* Incorrect endpoint URL
+* Authentication failure
+* Server-side application errors
+* Network problems
+* Timeout configuration
+* Incorrect WSDL implementation
+* Database failures
+
+A systematic debugging approach is required.
+
+---
+
+# 3.2 SOAP Communication Process
+
+The normal SOAP communication process is:
+
+```text
+Client
+  |
+  | 1. Create SOAP Request
+  v
+SOAP XML Message
+  |
+  | 2. Send through HTTP/HTTPS
+  v
+SOAP Endpoint
+  |
+  | 3. Validate Message
+  v
+SOAP Service
+  |
+  | 4. Execute Operation
+  v
+Database / Business Logic
+  |
+  | 5. Generate Response
+  v
+SOAP Response
+  |
+  | 6. Return to Client
+  v
+Client
+```
+
+An error at any stage can result in incorrect or delayed responses.
+
+---
+
+# 3.3 Issue 1: SOAP Message Formatting Errors
+
+SOAP messages must follow valid XML syntax.
+
+Incorrect:
+
+```xml
+<soap:Envelope>
+    <soap:Body>
+        <GetPatient>
+            <PatientId>P1001
+        </GetPatient>
+    </soap:Body>
+</soap:Envelope>
+```
+
+The `PatientId` element is not properly closed.
+
+Correct:
+
+```xml
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+
+    <soap:Body>
+        <GetPatient>
+            <PatientId>P1001</PatientId>
+        </GetPatient>
+    </soap:Body>
+
+</soap:Envelope>
+```
+
+### Debugging Approach
+
+Use:
+
+* XML validators
+* IDE XML validation
+* SOAP testing tools
+* Schema validation
+* Server logs
+
+---
+
+# 3.4 Issue 2: Incorrect Namespace
+
+Namespaces are extremely important in SOAP communication.
+
+For example:
+
+```xml
+<GetPatient
+    xmlns="http://wrong.example.com">
+```
+
+If the service expects:
+
+```text
+http://hospital.example.com/service
+```
+
+the server may not recognize the operation.
+
+### Solution
+
+Compare the namespace in:
+
+* WSDL
+* SOAP request
+* SOAP response
+* XML Schema
+
+All namespaces must match the expected definitions.
+
+---
+
+# 3.5 Issue 3: Incorrect Operation Name
+
+The client may send:
+
+```xml
+<GetPatients>
+```
+
+while the WSDL defines:
+
+```xml
+<GetPatient>
+```
+
+The service may therefore return an operation-not-found error.
+
+### Solution
+
+Verify the operation name against the WSDL.
+
+---
+
+# 3.6 Issue 4: Incorrect Data Types
+
+Suppose the WSDL expects:
+
+```xml
+<PatientId type="xsd:int">
+```
+
+but the client sends:
+
+```xml
+<PatientId>ABC123</PatientId>
+```
+
+The XML may be well formed but still violate the XML Schema.
+
+### Solution
+
+Validate the SOAP Body against the corresponding XSD.
+
+---
+
+# 3.7 Issue 5: Endpoint Problems
+
+The client may send the request to:
+
+```text
+https://example.com/wrongEndpoint
+```
+
+while the actual service is located at:
+
+```text
+https://example.com/services/hospital
+```
+
+This can result in:
+
+* Connection failures
+* HTTP 404 errors
+* Timeouts
+* Connection refused errors
+
+### Solution
+
+Check the endpoint URL specified in the WSDL and verify that the server is reachable.
+
+---
+
+# 3.8 Issue 6: Authentication and Authorization
+
+If the service requires authentication, missing or expired credentials may prevent the request from being processed.
+
+For example:
+
+```xml
+<soap:Header>
+    <Authentication>
+        <Username>doctor101</Username>
+        <Token>expired-token</Token>
+    </Authentication>
+</soap:Header>
+```
+
+### Solution
+
+Check:
+
+* Username
+* Authentication token
+* Token expiration
+* User permissions
+* Security headers
+* Server authentication logs
+
+---
+
+# 3.9 Issue 7: Network and Timeout Problems
+
+Delayed responses can be caused by:
+
+* Slow network
+* Server overload
+* Database queries
+* Connection problems
+* Incorrect timeout settings
+* External service dependency
+
+### Solution
+
+Monitor:
+
+* Request time
+* Server processing time
+* Database query time
+* Network latency
+* HTTP status codes
+
+Appropriate timeout and retry mechanisms should be implemented.
+
+---
+
+# 3.10 SOAP Fault Handling
+
+SOAP provides a standardized mechanism for reporting errors called **SOAP Fault**.
+
+Example:
+
+```xml
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+
+    <soap:Body>
+
+        <soap:Fault>
+
+            <faultcode>soap:Server</faultcode>
+
+            <faultstring>
+                Unable to retrieve patient record
+            </faultstring>
+
+            <detail>
+                Database service unavailable
+            </detail>
+
+        </soap:Fault>
+
+    </soap:Body>
+
+</soap:Envelope>
+```
+
+
+
+
+
+### 8. Database Optimization
+
+Slow database queries should be identified and optimized.
+
