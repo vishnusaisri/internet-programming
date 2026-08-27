@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hotel Room Booking</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f2f2f2;
+    text-align:center;
+}
+
+.container{
+    width:400px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    margin-top:30px;
+    border-radius:10px;
+}
+
+input,select{
+    width:90%;
+    padding:8px;
+    margin:8px;
+}
+
+button{
+    padding:10px 20px;
+    background:blue;
+    color:white;
+    border:none;
+}
+
+h1{
+    color:darkblue;
+}
+</style>
+
+<script>
+function bookRoom()
+{
+    var name=document.getElementById("name").value;
+    var room=document.getElementById("room").value;
+    var date=document.getElementById("date").value;
+
+    if(name=="" || date=="")
+    {
+        alert("Please fill all details");
+    }
+    else
+    {
+        alert("Booking Successful!\n\nName : "+name+
+        "\nRoom : "+room+
+        "\nDate : "+date);
+    }
+}
+</script>
+
+</head>
+
+<body>
+
+<h1>Online Hotel Room Booking</h1>
+
+<div class="container">
+
+<label>Name</label><br>
+<input type="text" id="name"><br>
+
+<label>Email</label><br>
+<input type="email"><br>
+
+<label>Room Type</label><br>
+
+<select id="room">
+<option>Standard Room</option>
+<option>Deluxe Room</option>
+<option>Executive Room</option>
+<option>Suite Room</option>
+</select>
+
+<br>
+
+<label>Booking Date</label><br>
+<input type="date" id="date"><br>
+
+<label>Number of Guests</label><br>
+<input type="number" min="1" max="5"><br>
+
+<button onclick="bookRoom()">Book Room</button>
+
+</div>
+
+</body>
+</html>
