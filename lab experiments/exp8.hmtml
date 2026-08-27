@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Defined Function</title>
+</head>
+<body>
+<script>
+function add(a, b)
+{
+    return a + b;
+}
+let x = parseInt(prompt("Enter first number"));
+let y = parseInt(prompt("Enter second number"));
+document.write("Sum = " + add(x, y));
+</script>
+
+</body>
+</html>
