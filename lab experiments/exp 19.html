@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VetCure - Veterinary Consultation System</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f8f6;color:#26352b}
+.header{background:#24764a;color:#fff;padding:18px 30px;font-size:25px;font-weight:bold}
+.layout{display:flex;min-height:calc(100vh - 65px)}
+.side{width:225px;background:#fff;padding:18px;box-shadow:2px 0 8px #0001}
+.side button{width:100%;padding:11px;margin:5px 0;border:0;border-radius:7px;text-align:left;background:#edf8f0;color:#24764a;font-weight:bold}
+.main{flex:1;padding:26px}.cards{display:flex;gap:15px}.card{background:#fff;padding:17px;border-radius:10px;flex:1;box-shadow:0 2px 7px #0001}.num{font-size:26px;font-weight:bold;color:#24764a;margin-top:6px}
+.panel{background:#fff;margin-top:19px;padding:19px;border-radius:10px;box-shadow:0 2px 7px #0001}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}th{background:#edf8f0}
+input,textarea,select{width:100%;padding:10px;margin:5px 0 10px;border:1px solid #ccd8cf;border-radius:6px}
+.btn{padding:8px 13px;border:0;border-radius:6px;background:#dff1e4;color:#21643f;cursor:pointer}.primary{background:#24764a;color:#fff}
+.status{background:#fff1c9;color:#735a00;padding:5px 9px;border-radius:12px}
+.doctor{display:inline-block;width:31%;margin:1%;padding:14px;border:1px solid #dbe4dd;border-radius:8px;background:#fbfdfb}
+</style>
+</head>
+<body>
+<div class="header">🐄 VetCure — Online Veterinary Consultation System</div>
+<div class="layout">
+<div class="side">
+<button>Dashboard</button><button>Register / Login</button><button>Post Complaint</button>
+<button>My Complaint Status</button><button>View Doctors</button><button>VetCure & Prescriptions</button>
+<button>News</button><button>Reports</button><button>Payments</button><button>My Profile</button>
+<hr><button>Doctor Dashboard</button><button>View Complaints</button><button>Manage Cure</button>
+<button>Manage News</button><button>User Details</button><button>Payment Details</button><button>Feedback</button>
+</div>
+<div class="main">
+<h2>VetCure Dashboard</h2>
+<div class="cards">
+<div class="card">Farmers<div class="num">520</div>Registered Users</div>
+<div class="card">Doctors<div class="num">24</div>Available Doctors</div>
+<div class="card">Complaints<div class="num">138</div>Active Requests</div>
+<div class="card">Reports<div class="num">76</div>Generated Reports</div>
+</div>
+
+<div class="panel">
+<h3>👨‍🌾 Farmer — Post Animal Complaint</h3>
+<input id="animal" placeholder="Animal name / type">
+<select><option>Dog</option><option>Cat</option><option>Cow</option><option>Goat</option><option>Other</option></select>
+<textarea id="symptoms" placeholder="Describe signs and symptoms"></textarea>
+<input type="file" multiple>
+<button class="btn primary" onclick="postComplaint()">Submit Complaint</button>
+</div>
+
+<div class="panel">
+<h3>📋 My Complaint Status</h3>
+<table>
+<tr><th>ID</th><th>Animal</th><th>Symptoms</th><th>Doctor</th><th>Status</th></tr>
+<tr><td>VC101</td><td>Cow</td><td>Loss of appetite</td><td>Dr. Kumar</td><td><span class="status">Responded</span></td></tr>
+<tr><td>VC102</td><td>Dog</td><td>Skin irritation</td><td>Dr. Priya</td><td><span class="status">Pending</span></td></tr>
+</table>
+</div>
+
+<div class="panel">
+<h3>🩺 View Doctors & Subscription</h3>
+<div class="doctor"><b>Dr. Kumar</b><p>Govt. CVH</p><p>Free Subscription</p><button class="btn primary" onclick="subscribe('Dr. Kumar')">Subscribe</button></div>
+<div class="doctor"><b>Dr. Priya</b><p>Private Clinic</p><p>Fee: ₹300</p><button class="btn primary" onclick="subscribe('Dr. Priya')">Pay & Subscribe</button></div>
+<div class="doctor"><b>Dr. Arjun</b><p>Private Clinic</p><p>Fee: ₹250</p><button class="btn primary" onclick="subscribe('Dr. Arjun')">Pay & Subscribe</button></div>
+</div>
+
+<div class="panel">
+<h3>💳 Payment</h3>
+<p><b>Available methods:</b> Bank Transfer | EasyPaisa</p>
+<input placeholder="Doctor bank / EasyPaisa details">
+<input placeholder="Amount">
+<button class="btn primary" onclick="payment()">Make Payment</button>
+</div>
+
+<div class="panel">
+<h3>👨‍⚕️ Doctor Dashboard</h3>
+<table>
+<tr><th>Complaint</th><th>Farmer</th><th>Animal</th><th>Action</th></tr>
+<tr><td>VC101</td><td>Rahul</td><td>Cow</td><td><button class="btn" onclick="solution()">Post Solution</button></td></tr>
+<tr><td>VC102</td><td>Anitha</td><td>Dog</td><td><button class="btn" onclick="solution()">Post Solution</button></td></tr>
+</table>
+</div>
+
+<div class="panel">
+<h3>📰 News & Disease Analysis</h3>
+<p><b>Latest:</b> Common livestock diseases and preventive vaccination information.</p>
+<p><b>Area Analysis:</b> Recorded data shows <b>skin infections</b> are the most reported pet disease in the selected area.</p>
+<button class="btn" onclick="alert('Disease report generated successfully')">Generate Report</button>
+</div>
+</div></div>
+<script>
+function postComplaint(){if(!document.getElementById('animal').value||!document.getElementById('symptoms').value){alert('Enter animal and symptoms');return}alert('Complaint submitted successfully!');}
+function subscribe(d){alert('Subscription request sent to '+d);}
+function payment(){alert('Payment request submitted through selected payment method.');}
+function solution(){alert('Doctor solution form opened.');}
+</script>
+</body>
+</html>
