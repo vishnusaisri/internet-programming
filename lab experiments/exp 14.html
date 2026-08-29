@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ReNewMarket</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f3f8f5;color:#263238}
+header{background:#176b4d;color:white;padding:18px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:bold}.nav button{margin-left:8px;padding:9px 14px;border:0;border-radius:5px;cursor:pointer}
+.hero{text-align:center;padding:45px;background:#dff3e9}
+.hero h1{font-size:40px;color:#176b4d}
+.search{padding:13px;width:55%;border:1px solid #ccc;border-radius:25px}
+.section{padding:30px 7%}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:white;padding:18px;border-radius:12px;box-shadow:0 3px 10px #d5dfda}
+.icon{font-size:55px}.price{color:#176b4d;font-weight:bold}
+button{background:#176b4d;color:white;border:0;padding:9px 13px;border-radius:5px;cursor:pointer;margin:3px}
+.admin{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.panel{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 8px #d5dfda}
+footer{background:#263238;color:white;padding:25px 7%;margin-top:20px}
+@media(max-width:800px){.cards,.admin{grid-template-columns:1fr 1fr}.search{width:90%}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">♻️ ReNewMarket</div>
+<div class="nav">
+<button onclick="login()">Login</button>
+<button onclick="users()">Users</button>
+<button onclick="orders()">Orders</button>
+</div>
+</header>
+
+<section class="hero">
+<h1>Buy. Sell. Reuse.</h1>
+<p>A trusted marketplace for pre-loved products.</p>
+<input class="search" id="search" placeholder="Search second-hand items..." onkeyup="searchItems()">
+</section>
+
+<section class="section">
+<h2>Popular Categories</h2>
+<div class="cards">
+<div class="card"><div class="icon">📱</div><h3>Electronics</h3><p>Phones, laptops and gadgets</p></div>
+<div class="card"><div class="icon">🛋️</div><h3>Furniture</h3><p>Sofas, tables and chairs</p></div>
+<div class="card"><div class="icon">👕</div><h3>Clothing</h3><p>Fashion and accessories</p></div>
+<div class="card"><div class="icon">🏺</div><h3>Collectibles</h3><p>Unique pre-loved items</p></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Featured Commodities</h2>
+<div class="cards" id="products">
+<div class="card" data-name="used laptop">
+<div class="icon">💻</div><h3>Used Laptop</h3><p>Good condition · Electronics</p><p class="price">₹25,000</p>
+<button onclick="editCommodity('Used Laptop')">Edit</button><button onclick="deleteCommodity('Used Laptop')">Delete</button></div>
+<div class="card" data-name="wooden table">
+<div class="icon">🪑</div><h3>Wooden Table</h3><p>Excellent condition · Furniture</p><p class="price">₹4,500</p>
+<button onclick="editCommodity('Wooden Table')">Edit</button><button onclick="deleteCommodity('Wooden Table')">Delete</button></div>
+<div class="card" data-name="jacket">
+<div class="icon">🧥</div><h3>Winter Jacket</h3><p>Like new · Clothing</p><p class="price">₹1,200</p>
+<button onclick="editCommodity('Winter Jacket')">Edit</button><button onclick="deleteCommodity('Winter Jacket')">Delete</button></div>
+<div class="card" data-name="watch">
+<div class="icon">⌚</div><h3>Vintage Watch</h3><p>Good condition · Collectible</p><p class="price">₹3,000</p>
+<button onclick="editCommodity('Vintage Watch')">Edit</button><button onclick="deleteCommodity('Vintage Watch')">Delete</button></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Administrator Panel</h2>
+<div class="admin">
+<div class="panel"><h3>👤 User Management</h3>
+<button onclick="setLogin()">Set Login</button><button onclick="editUser()">Edit User</button><button onclick="deleteUser()">Delete User</button></div>
+<div class="panel"><h3>📂 Category Management</h3>
+<button onclick="addCategory()">Add Category</button><button onclick="deleteCategory()">Delete Category</button></div>
+<div class="panel"><h3>📦 Commodity Management</h3>
+<button onclick="addCommodity()">Add Commodity</button><button onclick="editCommodity('Commodity')">Edit</button><button onclick="deleteCommodity('Commodity')">Delete</button></div>
+<div class="panel"><h3>🚚 Order Management</h3>
+<button onclick="ship()">Mark Shipped</button><button onclick="received()">Mark Received</button><button onclick="deleteOrder()">Delete Order</button></div>
+<div class="panel"><h3>🔐 Network Status</h3><p id="network">Checking connection...</p></div>
+<div class="panel"><h3>♻️ Sustainability</h3><p>Reuse products and reduce waste.</p></div>
+</div>
+</section>
+
+<footer>© 2026 ReNewMarket · Secure Marketplace · Buy · Sell · Reuse</footer>
+
+<script>
+function login(){alert("Login successful. Network connection is working.");}
+function setLogin(){alert("Administrator login account and password set.");}
+function users(){alert("User Management opened.");}
+function editUser(){alert("User details edited successfully.");}
+function deleteUser(){alert("User deleted successfully.");}
+function addCategory(){alert("New category added.");}
+function deleteCategory(){alert("Category deleted.");}
+function addCommodity(){alert("New commodity added.");}
+function editCommodity(x){alert(x+" edited successfully.");}
+function deleteCommodity(x){alert(x+" deleted successfully.");}
+function ship(){alert("Order logistics status changed to SHIPPED.");}
+function received(){alert("Order logistics status changed to RECEIVED.");}
+function deleteOrder(){alert("Order deleted successfully.");}
+function orders(){alert("Order Management opened.");}
+function searchItems(){
+ let s=document.getElementById("search").value.toLowerCase();
+ document.querySelectorAll("#products .card").forEach(c=>{
+  c.style.display=c.dataset.name.includes(s)?"block":"none";
+ });
+}
+document.getElementById("network").innerHTML =
+ navigator.onLine ? "🟢 Online - Connection Working" : "🔴 Offline";
+</script>
+</body>
+</html>
