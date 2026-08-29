@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BlossomGifts</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#fff7fa;color:#333}
+header{background:#c2185b;color:white;padding:18px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:bold}.nav a{color:white;text-decoration:none;margin:12px}
+.hero{text-align:center;padding:45px;background:#ffe0eb}
+.hero h1{font-size:42px;color:#ad1457}
+.search{padding:12px;width:55%;border:1px solid #ddd;border-radius:25px}
+.section{padding:30px 7%}
+.categories{display:flex;gap:12px;flex-wrap:wrap}
+.category{background:white;padding:15px 22px;border-radius:25px;box-shadow:0 2px 8px #ddd;cursor:pointer}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 10px #ddd}
+.pic{height:150px;background:#ffeef4;display:flex;align-items:center;justify-content:center;font-size:65px}
+.info{padding:16px}.price{color:#c2185b;font-weight:bold;font-size:20px}
+button{background:#c2185b;color:white;border:0;padding:10px 14px;border-radius:6px;cursor:pointer;margin:3px}
+.admin{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 8px #ddd}
+footer{background:#333;color:white;padding:25px 7%;margin-top:20px}
+@media(max-width:800px){.products{grid-template-columns:1fr 1fr}.search{width:90%}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">🌸 BlossomGifts</div>
+<div class="nav">
+<a href="#">Home</a><a href="#">Flowers</a><a href="#">Gifts</a>
+<a href="#" onclick="login()">Login</a><a href="#" onclick="showCart()">🛒 Cart</a>
+</div>
+</header>
+
+<section class="hero">
+<h1>Beautiful Gifts, Delivered with Love</h1>
+<p>Flowers and gifts for every special occasion</p>
+<input class="search" id="search" placeholder="Search flowers or gifts..." onkeyup="searchItems()">
+</section>
+
+<section class="section">
+<h2>Shop by Category</h2>
+<div class="categories">
+<div class="category">🌹 Birthday</div>
+<div class="category">💐 Anniversary</div>
+<div class="category">❤️ Love & Romance</div>
+<div class="category">🎁 Gift Baskets</div>
+<div class="category">🌸 Wedding</div>
+<div class="category">🎉 Congratulations</div>
+</div>
+</section>
+
+<section class="section">
+<h2>Popular Gifts</h2>
+<div class="products">
+
+<div class="card" data-name="rose bouquet">
+<div class="pic">🌹</div><div class="info">
+<h3>Rose Bouquet</h3><p>12 Red Roses · Birthday</p><p class="price">₹899</p>
+<button onclick="addCart('Rose Bouquet')">Add to Cart</button>
+<button onclick="details('Rose Bouquet')">Details</button>
+</div></div>
+
+<div class="card" data-name="chocolate basket">
+<div class="pic">🍫</div><div class="info">
+<h3>Chocolate Basket</h3><p>Premium Chocolates · Gift</p><p class="price">₹1,299</p>
+<button onclick="addCart('Chocolate Basket')">Add to Cart</button>
+<button onclick="details('Chocolate Basket')">Details</button>
+</div></div>
+
+<div class="card" data-name="flower cake">
+<div class="pic">🌺</div><div class="info">
+<h3>Flower & Cake Combo</h3><p>Flowers + Cake · Anniversary</p><p class="price">₹1,599</p>
+<button onclick="addCart('Flower & Cake Combo')">Add to Cart</button>
+<button onclick="details('Flower & Cake Combo')">Details</button>
+</div></div>
+
+<div class="card" data-name="gift hamper">
+<div class="pic">🎁</div><div class="info">
+<h3>Luxury Gift Hamper</h3><p>Personalized · Congratulations</p><p class="price">₹1,999</p>
+<button onclick="addCart('Luxury Gift Hamper')">Add to Cart</button>
+<button onclick="details('Luxury Gift Hamper')">Details</button>
+</div></div>
+
+</div>
+</section>
+
+<section class="section">
+<h2>Admin Panel</h2>
+<div class="admin">
+<button onclick="addProduct()">Add New Product</button>
+<button onclick="removeProduct()">Remove Product</button>
+<button onclick="changePrice()">Modify Price</button>
+<button onclick="customers()">View Customer Details</button>
+</div>
+</section>
+
+<footer>© 2026 BlossomGifts · Secure Payment · Delivery Tracking · Customer Support</footer>
+
+<script>
+let cart=[];
+function login(){alert("Login page opened.");}
+function addCart(p){cart.push(p);alert(p+" added to cart!");}
+function showCart(){alert(cart.length ? "Cart: "+cart.join(", ") : "Your cart is empty.");}
+function details(p){alert(p+"\nHigh-quality product\nDelivery available\nSecure payment supported.");}
+function searchItems(){
+ let s=document.getElementById("search").value.toLowerCase();
+ document.querySelectorAll(".card").forEach(c=>{
+   c.style.display=c.dataset.name.includes(s)?"block":"none";
+ });
+}
+function addProduct(){alert("Admin: Add new product form opened.");}
+function removeProduct(){alert("Admin: Product removed successfully.");}
+function changePrice(){alert("Admin: Product price updated.");}
+function customers(){alert("Customer details: Name, email, address and order history.");}
+</script>
+</body>
+</html>
