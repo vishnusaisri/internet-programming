@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AgriMart - Agriculture Marketplace</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f8f3;color:#25352a}
+.header{background:#287a3d;color:white;padding:18px 30px;font-size:25px;font-weight:bold}
+.layout{display:flex;min-height:calc(100vh - 65px)}
+.sidebar{width:225px;background:white;padding:20px;box-shadow:2px 0 8px #0001}
+.sidebar button{display:block;width:100%;padding:11px;margin:6px 0;border:0;border-radius:7px;text-align:left;background:#edf8ef;color:#287a3d;font-weight:bold}
+.main{flex:1;padding:28px}.cards{display:flex;gap:16px}
+.card{background:white;padding:18px;border-radius:10px;flex:1;box-shadow:0 2px 7px #0001}
+.num{font-size:27px;font-weight:bold;color:#287a3d;margin-top:7px}
+.panel{background:white;margin-top:20px;padding:20px;border-radius:10px;box-shadow:0 2px 7px #0001}
+table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #ddd;text-align:left}th{background:#edf8ef}
+.btn{border:0;padding:8px 12px;border-radius:6px;cursor:pointer;background:#dff1e2;color:#216632}
+.delete{background:#fee2e2;color:#991b1b}.primary{background:#287a3d;color:white}
+input,select{padding:10px;width:100%;margin:5px 0 12px;border:1px solid #ccd6ce;border-radius:6px}
+.product{display:inline-block;width:30%;margin:1%;padding:15px;border:1px solid #ddd;border-radius:8px;background:#fafdf9;vertical-align:top}
+.product .pic{height:80px;background:#e6f4e8;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:35px}
+.status{padding:5px 9px;border-radius:12px;background:#fff3cd;color:#765900}
+</style>
+</head>
+<body>
+<div class="header">🌾 AgriMart — Agricultural Marketplace</div>
+<div class="layout">
+<div class="sidebar">
+<button>Dashboard</button>
+<button>Farmer Login / Register</button>
+<button>Manage Products</button>
+<button>My Sales</button>
+<button>Manage Orders</button>
+<button>Public Shop</button>
+<button>My Cart</button>
+<button>My Orders</button>
+<button>Wallet</button>
+<button>Shipping Address</button>
+<button onclick="logout()">Logout</button>
+</div>
+<div class="main">
+<h2>AgriMart Dashboard</h2>
+
+<div class="cards">
+<div class="card">Products<div class="num">248</div>Available Products</div>
+<div class="card">Farmers<div class="num">86</div>Registered Farmers</div>
+<div class="card">Orders<div class="num">124</div>Active Orders</div>
+<div class="card">Sales<div class="num">₹48,650</div>My Sales</div>
+</div>
+
+<div class="panel">
+<h3>🌱 Farmer — Add / Manage Product</h3>
+<input id="pname" placeholder="Product name">
+<select id="category"><option>Seeds</option><option>Fertilizers</option><option>Pesticides</option><option>Farming Equipment</option><option>Tools</option></select>
+<input id="price" placeholder="Price">
+<input type="file" id="image">
+<button class="btn primary" onclick="addProduct()">Add Product</button>
+<table style="margin-top:18px">
+<tr><th>Product</th><th>Category</th><th>Price</th><th>Action</th></tr>
+<tr><td>Tomato Seeds</td><td>Seeds</td><td>₹250</td><td><button class="btn" onclick="alert('Product updated')">Edit</button> <button class="btn delete" onclick="deleteRow(this)">Delete</button></td></tr>
+<tr><td>Organic Fertilizer</td><td>Fertilizers</td><td>₹600</td><td><button class="btn" onclick="alert('Product updated')">Edit</button> <button class="btn delete" onclick="deleteRow(this)">Delete</button></td></tr>
+</table>
+</div>
+
+<div class="panel">
+<h3>🛒 Public — Search & Products</h3>
+<input id="search" placeholder="Search products..." onkeyup="filterProducts()">
+<div id="products">
+<div class="product" data-name="tomato seeds"><div class="pic">🌱</div><b>Tomato Seeds</b><p>₹250</p><button class="btn primary" onclick="addCart('Tomato Seeds')">Add to Cart</button></div>
+<div class="product" data-name="organic fertilizer"><div class="pic">🌿</div><b>Organic Fertilizer</b><p>₹600</p><button class="btn primary" onclick="addCart('Organic Fertilizer')">Add to Cart</button></div>
+<div class="product" data-name="sprayer"><div class="pic">🚜</div><b>Farm Sprayer</b><p>₹1,850</p><button class="btn primary" onclick="addCart('Farm Sprayer')">Add to Cart</button></div>
+</div>
+</div>
+
+<div class="panel">
+<h3>📦 Orders & Shipping Status</h3>
+<table>
+<tr><th>Order ID</th><th>Product</th><th>Customer</th><th>Order Status</th><th>Shipping</th><th>Action</th></tr>
+<tr><td>AM1001</td><td>Tomato Seeds</td><td>Anitha</td><td><span class="status">Confirmed</span></td><td><span class="status">Shipped</span></td><td><button class="btn" onclick="changeStatus(this)">Update</button></td></tr>
+<tr><td>AM1002</td><td>Organic Fertilizer</td><td>Rahul</td><td><span class="status">Processing</span></td><td><span class="status">Pending</span></td><td><button class="btn" onclick="changeStatus(this)">Update</button></td></tr>
+</table>
+</div>
+
+<div class="panel">
+<h3>💰 Wallet & Shipping Address</h3>
+<p><b>Wallet Balance:</b> ₹2,500</p>
+<button class="btn primary" onclick="alert('Wallet balance updated')">Manage Wallet</button>
+<input placeholder="Shipping address">
+<button class="btn" onclick="alert('Shipping address saved')">Save Address</button>
+</div>
+</div></div>
+
+<script>
+function addProduct(){
+ let n=document.getElementById('pname').value;
+ if(!n){alert('Enter product name');return}
+ alert(n+' added successfully!');
+}
+function addCart(p){alert(p+' added to cart!');}
+function deleteRow(b){b.closest('tr').remove();alert('Product deleted');}
+function changeStatus(b){
+ let s=b.closest('tr').querySelectorAll('.status')[1];
+ s.innerText=s.innerText==='Pending'?'Shipped':s.innerText==='Shipped'?'Delivered':'Pending';
+ alert('Shipping status updated!');
+}
+function filterProducts(){
+ let q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('.product').forEach(p=>p.style.display=p.dataset.name.includes(q)?'inline-block':'none');
+}
+function logout(){alert('Logged out successfully');}
+</script>
+</body>
+</html>
