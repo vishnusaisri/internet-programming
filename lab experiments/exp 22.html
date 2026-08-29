@@ -1,0 +1,46 @@
+bins = [
+    {"id": 1, "location": "Anna Nagar", "status": "Full"},
+    {"id": 2, "location": "Ambattur", "status": "Half"},
+    {"id": 3, "location": "Avadi", "status": "Full"}
+]
+
+def view_bins():
+    print("\n--- Garbage Bins ---")
+    for b in bins:
+        print(f"Bin {b['id']} | {b['location']} | {b['status']}")
+
+def best_route():
+    route = [b["location"] for b in bins if b["status"] == "Full"]
+    print("\nBest Route:")
+    print(" -> ".join(route) + " -> Dumping Site")
+
+def garbage_report():
+    full = sum(b["status"] == "Full" for b in bins)
+    half = sum(b["status"] == "Half" for b in bins)
+
+    print("\n--- Garbage Report ---")
+    print("Total Bins :", len(bins))
+    print("Full Bins  :", full)
+    print("Half Bins  :", half)
+
+def public_complaint():
+    print("\n--- Public Complaint ---")
+    print("Complaint: Bin overflowing")
+    print("Status   : Pending")
+
+def driver_update():
+    print("\n--- Driver Daily Update ---")
+    print("Driver : Kumar")
+    print("Work   : Collect garbage from assigned bins")
+    print("Load   : 85%")
+
+print("===== SOLID WASTE MANAGEMENT SYSTEM =====")
+
+view_bins()
+best_route()
+garbage_report()
+public_complaint()
+driver_update()
+
+print("\nAdmin: Route assigned successfully.")
+print("Dashboard: Waste collection data updated.")vvvvvvvvvvvvvvvvvvv
