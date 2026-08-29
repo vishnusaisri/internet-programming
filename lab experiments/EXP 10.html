@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StyleHub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f5f5f5;
+        }
+
+        nav {
+            background: #111;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: #ff4081;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px;
+            background: #ffe1ea;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+        }
+
+        .search {
+            width: 60%;
+            padding: 13px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+        }
+
+        .categories {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .category {
+            display: inline-block;
+            background: white;
+            padding: 12px 20px;
+            margin: 7px;
+            border-radius: 20px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px 6%;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .image {
+            font-size: 70px;
+            padding: 20px;
+            background: #eee;
+        }
+
+        .price {
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        button {
+            background: #111;
+            color: white;
+            padding: 10px 15px;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #e91e63;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+        }
+
+        @media(max-width:800px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">StyleHub</div>
+
+    <div>
+        <a href="#">Home</a>
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">Kids</a>
+        <a href="#" onclick="login()">Login</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>Fashion for Everyone</h1>
+
+    <p>Discover the latest fashion trends</p>
+
+    <input class="search"
+           id="search"
+           placeholder="Search for items..."
+           onkeyup="searchItems()">
+</div>
+
+<div class="categories">
+
+    <h2>Shop by Category</h2>
+
+    <span class="category">Casual Wear</span>
+    <span class="category">Formal Wear</span>
+    <span class="category">Footwear</span>
+    <span class="category">Accessories</span>
+    <span class="category">Seasonal Collection</span>
+
+</div>
+
+<div class="products" id="products">
+
+    <div class="card" data-name="shirt">
+        <div class="image">👕</div>
+        <h3>Classic Shirt</h3>
+        <p>Men's Casual Wear</p>
+        <p class="price">₹999</p>
+        <button onclick="addCart()">Add to Cart</button>
+        <button onclick="details('Classic Shirt')">Details</button>
+    </div>
+
+    <div class="card" data-name="dress">
+        <div class="image">👗</div>
+        <h3>Summer Dress</h3>
+        <p>Women's Wear</p>
+        <p class="price">₹1499</p>
+        <button onclick="addCart()">Add to Cart</button>
+        <button onclick="details('Summer Dress')">Details</button>
+    </div>
+
+    <div class="card" data-name="shoes">
+        <div class="image">👟</div>
+        <h3>Sport Shoes</h3>
+        <p>Footwear</p>
+        <p class="price">₹1999</p>
+        <button onclick="addCart()">Add to Cart</button>
+        <button onclick="details('Sport Shoes')">Details</button>
+    </div>
+
+    <div class="card" data-name="bag">
+        <div class="image">👜</div>
+        <h3>Fashion Bag</h3>
+        <p>Accessories</p>
+        <p class="price">₹1299</p>
+        <button onclick="addCart()">Add to Cart</button>
+        <button onclick="details('Fashion Bag')">Details</button>
+    </div>
+
+</div>
+
+<div class="cart">
+    🛒 Cart: <span id="count">0</span>
+</div>
+
+<script>
+
+let count = 0;
+
+function addCart() {
+    count++;
+    document.getElementById("count").innerHTML = count;
+    alert("Item added to cart!");
+}
+
+function searchItems() {
+
+    let search =
+        document.getElementById("search").value.toLowerCase();
+
+    let products =
+        document.querySelectorAll(".card");
+
+    products.forEach(function(product) {
+
+        let name = product.dataset.name;
+
+        if (name.includes(search))
+            product.style.display = "block";
+        else
+            product.style.display = "none";
+
+    });
+}
+
+function login() {
+    alert("Login successful!");
+}
+
+function logout() {
+    alert("You have been logged out.");
+}
+
+function details(item) {
+    alert("Product Details: " + item +
+          "\nAvailability: Available" +
+          "\nEasy Return Available");
+}
+
+</script>
+
+</body>
+</html>
