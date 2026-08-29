@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>InsureEasy</title>
+<style>
+body{margin:0;font-family:Arial;background:#f4f8fb;color:#263238}
+header{background:#075985;color:white;padding:18px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:bold}.nav button{margin-left:10px;padding:9px 15px;border:0;border-radius:5px;cursor:pointer}
+.hero{text-align:center;padding:45px;background:#dff3ff}
+.hero h1{font-size:40px;color:#075985}
+.container{padding:30px 7%}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:white;padding:22px;border-radius:12px;box-shadow:0 3px 12px #ccd6dd}
+.icon{font-size:45px}.card button,.primary{background:#075985;color:white;border:0;padding:10px 16px;border-radius:6px;cursor:pointer}
+.login{background:white;padding:25px;max-width:450px;margin:25px auto;border-radius:12px;box-shadow:0 3px 12px #ccd6dd}
+input,select{width:100%;padding:11px;margin:8px 0;border:1px solid #ccd6dd;border-radius:5px;box-sizing:border-box}
+footer{background:#17212b;color:white;padding:25px 7%;margin-top:30px}
+@media(max-width:800px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🛡️ InsureEasy</div>
+<div class="nav">
+<button onclick="login('Admin')">Admin</button>
+<button onclick="login('Agent')">Agent</button>
+<button onclick="login('User')">User</button>
+</div>
+</header>
+
+<section class="hero">
+<h1>Simple & Secure Insurance Management</h1>
+<p>Manage policies, customers, claims and reminders in one place.</p>
+</section>
+
+<div class="container">
+<h2>Insurance Services</h2>
+<div class="cards">
+<div class="card"><div class="icon">🏥</div><h3>Health Insurance</h3><p>Compare and manage health policies.</p><button onclick="policy('Health Insurance')">Manage Policy</button></div>
+<div class="card"><div class="icon">🚗</div><h3>Auto Insurance</h3><p>Protect your vehicle with suitable coverage.</p><button onclick="policy('Auto Insurance')">Manage Policy</button></div>
+<div class="card"><div class="icon">🏠</div><h3>Home Insurance</h3><p>Secure your home and valuable assets.</p><button onclick="policy('Home Insurance')">Manage Policy</button></div>
+</div>
+
+<h2>Agent Dashboard</h2>
+<div class="cards">
+<div class="card"><h3>👤 Register Customer</h3><button onclick="customer()">Create Customer</button></div>
+<div class="card"><h3>📋 Customer Details</h3><button onclick="details()">View Details</button></div>
+<div class="card"><h3>📱 SMS Alert</h3><button onclick="sms()">Send SMS Alert</button></div>
+</div>
+
+<h2>User Policy Dashboard</h2>
+<div class="login">
+<h3>Policy Information</h3>
+<p><b>Policy:</b> Health Insurance</p>
+<p><b>Policy No:</b> IE-2026-1025</p>
+<p><b>Premium:</b> ₹2,500 / month</p>
+<p><b>Due Date:</b> 30-09-2026</p>
+<button class="primary" onclick="pay()">Pay Premium</button>
+<button class="primary" onclick="claim()">File Claim</button>
+</div>
+</div>
+
+<footer>© 2026 InsureEasy | Insurance Management System</footer>
+
+<script>
+function login(role){alert(role+" login page opened.");}
+function policy(p){alert(p+" policy details opened.");}
+function customer(){alert("Customer registration form opened.");}
+function details(){alert("Customer details displayed.");}
+function sms(){alert("SMS reminder sent to policyholder.");}
+function pay(){alert("Premium payment successful.");}
+function claim(){alert("Claim request submitted.");}
+</script>
+</body>
+</html>
