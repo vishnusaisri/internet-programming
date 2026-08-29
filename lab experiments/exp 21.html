@@ -1,0 +1,50 @@
+vacancies = []
+
+# Director posts vacancy
+def post_vacancy():
+    print("\n--- Post Vacancy ---")
+    job = input("Job title: ")
+    location = input("Location: ")
+    category = input("Category: ")
+    description = input("Description: ")
+    vacancies.append([job, location, category, description])
+    print("Vacancy posted successfully!")
+
+# User searches vacancies
+def search_vacancy():
+    print("\n--- Search Vacancy ---")
+    location = input("Enter location: ")
+    category = input("Enter category: ")
+
+    found = False
+    for v in vacancies:
+        if v[1].lower() == location.lower() and v[2].lower() == category.lower():
+            print("\nJob:", v[0])
+            print("Location:", v[1])
+            print("Category:", v[2])
+            print("Description:", v[3])
+            found = True
+
+    if not found:
+        print("No vacancy found.")
+
+# User applies
+def apply_job():
+    name = input("\nEnter your name: ")
+    job = input("Enter job title to apply: ")
+
+    for v in vacancies:
+        if v[0].lower() == job.lower():
+            print("Application submitted successfully!")
+            print("Applicant:", name)
+            print("Job:", job)
+            return
+
+    print("Job not found.")
+
+# Main program
+print("===== ONLINE JOB VACANCY PORTAL =====")
+
+post_vacancy()
+search_vacancy()
+apply_job()
