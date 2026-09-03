@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<student>
+  <profile name="Student" batch="2026-27"/>
+  <skills>
+    <skill name="Python" category="Programming" level="88"/>
+    <skill name="Java" category="Programming" level="76"/>
+    <skill name="HTML &amp; CSS" category="Web Development" level="84"/>
+    <skill name="JavaScript" category="Web Development" level="72"/>
+    <skill name="MySQL" category="Database" level="74"/>
+    <skill name="Communication" category="Soft Skills" level="68"/>
+  </skills>
+</student>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillTrack — Student Skill Development Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">S</span><div><b>SkillTrack</b><small>Student Development</small></div></div>
+    <nav>
+      <a class="active" href="#dashboard">⌂ <span>Dashboard</span></a>
+      <a href="#skills">◆ <span>My Skills</span></a>
+      <a href="#assessment">✓ <span>Assessments</span></a>
+      <a href="#evidence">▣ <span>Projects & Certifications</span></a>
+      <a href="#learning">▤ <span>Learning Plan</span></a>
+      <a href="#progress">◔ <span>Progress</span></a>
+      <a href="#mentor">♧ <span>Mentor Feedback</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="mini-profile"><div class="avatar">AK</div><div><b>Student</b><small>Skill Profile</small></div></div>
+      <button id="themeBtn" class="ghost-btn">☼ Toggle theme</button>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">CSA4305 · INTERNET PROGRAMMING</div>
+        <h1 id="pageTitle">Student Skill Dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" onclick="showToast('No new notifications')">🔔<span class="dot"></span></button>
+        <button class="profile-btn"><span class="avatar small">AK</span> Student ▾</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="page">
+      <div class="hero">
+        <div><span class="pill">2026–27 Skill Journey</span><h2>Build skills. Prove them. Grow.</h2>
+        <p>Manage your competencies, assessments, evidence and learning goals in one place.</p></div>
+        <button class="primary" onclick="scrollToId('skills')">+ Update skill profile</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card"><span>Overall proficiency</span><strong>78%</strong><div class="progress"><i style="width:78%"></i></div><small>+8% this semester</small></div>
+        <div class="stat-card"><span>Skills tracked</span><strong>12</strong><small>4 advanced · 5 intermediate · 3 beginner</small></div>
+        <div class="stat-card"><span>Learning completion</span><strong>68%</strong><div class="progress"><i style="width:68%"></i></div><small>6 of 9 activities completed</small></div>
+        <div class="stat-card"><span>Employability readiness</span><strong>84%</strong><div class="progress"><i style="width:84%"></i></div><small>Strong progress</small></div>
+      </div>
+
+      <div class="grid two">
+        <div class="panel">
+          <div class="panel-head"><div><h3>Skill Overview</h3><small>Current proficiency by category</small></div><button class="text-btn" onclick="scrollToId('skills')">View all →</button></div>
+          <div class="skill-row"><div><b>Programming</b><small>Python · Java · C++</small></div><strong>86%</strong><div class="progress"><i style="width:86%"></i></div></div>
+          <div class="skill-row"><div><b>Web Development</b><small>HTML · CSS · JavaScript</small></div><strong>79%</strong><div class="progress"><i style="width:79%"></i></div></div>
+          <div class="skill-row"><div><b>Database</b><small>MySQL · SQL</small></div><strong>72%</strong><div class="progress"><i style="width:72%"></i></div></div>
+          <div class="skill-row"><div><b>Communication</b><small>Presentation · Teamwork</small></div><strong>68%</strong><div class="progress"><i style="width:68%"></i></div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><h3>Competency Gaps</h3><small>Priority areas based on assessments</small></div></div>
+          <div class="gap"><span class="risk high">HIGH</span><div><b>JavaScript Advanced</b><small>Target 80% · Current 55%</small></div><button onclick="showToast('Learning plan opened for JavaScript Advanced')">Improve</button></div>
+          <div class="gap"><span class="risk medium">MED</span><div><b>System Design</b><small>Target 75% · Current 58%</small></div><button onclick="showToast('Learning plan opened for System Design')">Improve</button></div>
+          <div class="gap"><span class="risk low">LOW</span><div><b>Public Speaking</b><small>Target 70% · Current 64%</small></div><button onclick="showToast('Practice activity added')">Improve</button></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><div><h3>Recent Activity</h3><small>Your latest skill-development updates</small></div><button class="text-btn" onclick="showToast('Full activity report generated')">Generate report</button></div>
+        <div class="activity"><span class="activity-icon">✓</span><div><b>JavaScript Assessment completed</b><small>Score 82% · Today</small></div><span class="badge success">Completed</span></div>
+        <div class="activity"><span class="activity-icon">▣</span><div><b>Added “Secure File Sharing System” project</b><small>Evidence submitted · Yesterday</small></div><span class="badge info">Pending review</span></div>
+        <div class="activity"><span class="activity-icon">★</span><div><b>Python certification added</b><small>Issued by training provider · 3 days ago</small></div><span class="badge success">Verified</span></div>
+      </div>
+    </section>
+
+    <section id="skills" class="page hidden">
+      <div class="section-title"><div><span class="eyebrow">PROFILE MANAGEMENT</span><h2>My Skills</h2><p>Maintain categorized skills and current proficiency levels.</p></div><button class="primary" onclick="openModal('skillModal')">+ Add Skill</button></div>
+      <div id="skillList" class="cards"></div>
+    </section>
+
+    <section id="assessment" class="page hidden">
+      <div class="section-title"><div><span class="eyebrow">SELF / TEST-BASED ASSESSMENT</span><h2>Assessments</h2><p>Measure competency and identify improvement areas.</p></div><button class="primary" onclick="showToast('Assessment started: Web Development')">Start assessment</button></div>
+      <div class="panel table-wrap"><table><thead><tr><th>Assessment</th><th>Category</th><th>Score</th><th>Date</th><th>Status</th></tr></thead><tbody>
+        <tr><td><b>JavaScript Fundamentals</b></td><td>Programming</td><td>82%</td><td>03 Sep 2026</td><td><span class="badge success">Completed</span></td></tr>
+        <tr><td><b>Database & SQL</b></td><td>Database</td><td>74%</td><td>28 Aug 2026</td><td><span class="badge success">Completed</span></td></tr>
+        <tr><td><b>Communication Skills</b></td><td>Soft Skills</td><td>68%</td><td>20 Aug 2026</td><td><span class="badge success">Completed</span></td></tr>
+        <tr><td><b>System Design Basics</b></td><td>Architecture</td><td>—</td><td>Pending</td><td><span class="badge warning">Due</span></td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="evidence" class="page hidden">
+      <div class="section-title"><div><span class="eyebrow">EVIDENCE TRACKING</span><h2>Projects & Certifications</h2><p>Store achievements and supporting evidence.</p></div><button class="primary" onclick="showToast('Evidence upload dialog opened')">+ Add Evidence</button></div>
+      <div class="grid two">
+        <div class="panel"><div class="panel-head"><h3>Projects</h3></div><div class="item"><b>Secure Client-Server File Sharing System</b><small>Python · Flask · SQLite</small><span class="badge info">Mentor review</span></div><div class="item"><b>Student Skill Management Portal</b><small>HTML · CSS · JavaScript</small><span class="badge success">Verified</span></div></div>
+        <div class="panel"><div class="panel-head"><h3>Certifications</h3></div><div class="item"><b>Python Programming</b><small>Certification · 2026</small><span class="badge success">Verified</span></div><div class="item"><b>Web Development Fundamentals</b><small>Certification · 2026</small><span class="badge warning">Pending</span></div></div>
+      </div>
+    </section>
+
+    <section id="learning" class="page hidden">
+      <div class="section-title"><div><span class="eyebrow">RECOMMENDATIONS</span><h2>Learning Plan</h2><p>Recommended activities based on your competency gaps.</p></div></div>
+      <div class="cards">
+        <div class="learning-card"><span class="course-icon">JS</span><div><h3>Advanced JavaScript</h3><p>Async programming, APIs, modules and advanced DOM concepts.</p><div class="tags"><span>High Priority</span><span>4 weeks</span></div></div><button class="primary small-btn" onclick="showToast('Added Advanced JavaScript to your plan')">Add</button></div>
+        <div class="learning-card"><span class="course-icon">SD</span><div><h3>System Design Fundamentals</h3><p>Architecture, scalability, databases and design trade-offs.</p><div class="tags"><span>Medium Priority</span><span>3 weeks</span></div></div><button class="primary small-btn" onclick="showToast('Added System Design to your plan')">Add</button></div>
+        <div class="learning-card"><span class="course-icon">CS</span><div><h3>Public Speaking Practice</h3><p>Presentation exercises, feedback sessions and communication activities.</p><div class="tags"><span>Low Priority</span><span>2 weeks</span></div></div><button class="primary small-btn" onclick="showToast('Added practice activity to your plan')">Add</button></div>
+      </div>
+    </section>
+
+    <section id="progress" class="page hidden">
+      <div class="section-title"><div><span class="eyebrow">PROGRESS MONITORING</span><h2>My Progress</h2><p>Track improvement over time.</p></div></div>
+      <div class="panel chart-panel"><h3>Overall Skill Growth</h3><div class="chart"><div class="bar" style="height:42%"><span>Jun</span></div><div class="bar" style="height:50%"><span>Jul</span></div><div class="bar" style="height:61%"><span>Aug</span></div><div class="bar" style="height:78%"><span>Sep</span></div></div><div class="chart-note">Overall proficiency improved from <b>58%</b> to <b>78%</b>.</div></div>
+    </section>
+
+    <section id="mentor" class="page hidden">
+      <div class="section-title"><div><span class="eyebrow">FACULTY / MENTOR</span><h2>Mentor Feedback</h2><p>Review guidance and development goals.</p></div></div>
+      <div class="panel feedback"><div class="avatar">DS</div><div><h3>Mentor Feedback</h3><small>Faculty Mentor · 02 Sep 2026</small><p>Good improvement in programming and project work. Focus next on advanced JavaScript and system design. Add stronger evidence for your communication skill activities.</p><div class="tags"><span>Programming ✓</span><span>Projects ✓</span><span>Communication →</span></div></div></div>
+    </section>
+  </main>
+
+  <div id="skillModal" class="modal hidden">
+    <div class="modal-box"><button class="close" onclick="closeModal('skillModal')">×</button><h2>Add a Skill</h2><label>Skill name<input id="newSkill" placeholder="e.g. React"></label><label>Category<select id="newCategory"><option>Programming</option><option>Web Development</option><option>Database</option><option>Communication</option><option>Other</option></select></label><label>Proficiency<input id="newLevel" type="range" min="0" max="100" value="60" oninput="levelValue.textContent=this.value+'%'"><span id="levelValue">60%</span></label><button class="primary full" onclick="addSkill()">Save Skill</button></div>
+  </div>
+  <div id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
